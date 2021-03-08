@@ -129,6 +129,7 @@ public class Controller {
     public void convertSurprise(ActionEvent actionEvent) {
         imgAfter.setImage(imgBefore.getImage());
         Image image = imgAfter.getImage();
+
     //Calling the Rotation(surprise) method
         imgAfter.setImage(surprise(image));
     }
@@ -151,6 +152,7 @@ public class Controller {
         java.awt.Color newPixelColor = new java.awt.Color(red, green, blue, alpha);
         return newPixelColor;
     }
+
     // code for doing the rotation on y-axis
     public BufferedImage rotateImage(BufferedImage img) {
         int nHeight = img.getHeight();
