@@ -15,14 +15,23 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller {
     @FXML Button btnGrayScale;
     @FXML Button btnSepia;
     @FXML Button btnSurprise;
+    @FXML Button openImage;
     @FXML ImageView imgBefore;
     @FXML ImageView imgAfter;
 
-    //Import Image with ImagePicker there's an example of it on D2l
+    //File chooser to pick your own image to manipulate
+    //Used with the "Open Image" button
+    public void openImage(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
+        Image image = new Image(selectedFile.toURI().toString());
+        imgBefore.setImage(image);
+        imgAfter.setImage(image);
+    }
 
     //Convert before image to Gray Scale in the After Image
     public void convertGrayScale(ActionEvent actionEvent) {
@@ -160,23 +169,7 @@ public class Controller implements Initializable {
                 img.setRGB(nWidth - 1 - x, y, newPixelColor1.getRGB());
             }
         }
-
         return img;
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-    //File chooser to pick your own image to manipulate
-    //Used with the "Open Image" button
-    public void openImage(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
-        Image image = new Image(selectedFile.toURI().toString());
-        imgBefore.setImage(image);
-        imgAfter.setImage(image);
     }
 }
 
