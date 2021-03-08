@@ -118,17 +118,55 @@ public class Controller implements Initializable {
 
     //Convert Image to whatever you want in the After Image
     public void convertSurprise(ActionEvent actionEvent) {
+        imgAfter.setImage(imgBefore.getImage());
+        Image image = imgAfter.getImage();
+
+        imgAfter.setImage(surprise(image));
     }
 
+    public Image surprise(Image img) {
+        BufferedImage bImage = SwingFXUtils.fromFXImage(img, null);
+        BufferedImage newImage = rotateImage(bImage);
+        Image image2 = SwingFXUtils.toFXImage(newImage, null);
+
+        return image2;
+    }
+
+    public java.awt.Color ChangePixel(int pixel) {
+        java.awt.Color color = new java.awt.Color(pixel);
+        int alpha = color.getAlpha();
+        int red = color.getRed();
+        int green = color.getGreen();
+        int blue = color.getBlue();
+
+        java.awt.Color newPixelColor = new java.awt.Color(red, green, blue, alpha);
+        return newPixelColor;
+    }
+
+    public BufferedImage rotateImage(BufferedImage img) {
+        int nHeight = img.getHeight();
+        int nWidth = img.getWidth();
+
+        for (int y = 0; y < nHeight; y++) {
+            for (int x = 0; x < nWidth/2; x++) {
+
+                int pixel1 = img.getRGB(x, y);
+                java.awt.Color newPixelColor1 = ChangePixel(pixel1);
+
+                int pixel2 = img.getRGB(nWidth - 1 - x, y);
+                java.awt.Color newPixelColor2 = ChangePixel(pixel2);
+
+                img.setRGB(x, y, newPixelColor2.getRGB());
+                img.setRGB(nWidth - 1 - x, y, newPixelColor1.getRGB());
+            }
+        }
+
+        return img;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Set Images
 
-        /*
-        I assume that setting the images needs to be done here
-        If not just take out the implements Initializable thing
-         */
     }
 
     //File chooser to pick your own image to manipulate
