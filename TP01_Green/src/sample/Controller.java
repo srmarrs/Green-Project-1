@@ -21,7 +21,7 @@ public class Controller implements Initializable {
     //Convert before image to Gray Scale in the After Image
     public void convertGrayScale(ActionEvent actionEvent) {
     }
-
+hadihv
     //Convert Image to Sepia in the After Image
     public void convertSepia(ActionEvent actionEvent) {
     }
